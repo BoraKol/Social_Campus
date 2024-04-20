@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "180446850099",
+    "project_id": "social-campus-b3a0f",
+    "storage_bucket": "social-campus-b3a0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:180446850099:android:7e43534ce72e12ba400746",
+        "android_client_info": {
+          "package_name": "com.computer.socialcampus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAymIkjSeTs0r282oX3Hb-s83QL7pzzhIE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
