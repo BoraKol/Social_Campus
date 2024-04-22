@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+<!--
+            <ImageButton
+                android:id="@+id/cardPP"
+                android:layout_width="56dp"
+                android:layout_height="47dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginBottom="13dp"
+                android:src="@android:drawable/btn_star"
+                app:layout_constraintBottom_toTopOf="@+id/card_description"
+                app:layout_constraintEnd_toStartOf="@+id/card_userName"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/card_userName"
+                android:layout_width="190dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="29dp"
+                android:layout_marginEnd="135dp"
+                android:layout_marginBottom="4dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/card_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardPP"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="17dp"
+                android:src="@tools:sample/avatars"
+                app:layout_constraintBottom_toTopOf="@+id/card_likeButton"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card_description" />
+
+            <TextView
+                android:id="@+id/card_date"
+                android:layout_width="95dp"
+                android:layout_height="16dp"
+                android:layout_marginStart="21dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="230dp"
+                android:layout_marginBottom="18dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/card_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardPP"
+                app:layout_constraintTop_toBottomOf="@+id/card_userName" />
+
+            <TextView
+                android:id="@+id/card_description"
+                android:layout_width="401dp"
+                android:layout_height="135dp"
+                android:layout_marginStart="7dp"
+                android:layout_marginTop="13dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/imageView3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardPP" />
+
+            <ImageButton
+                android:id="@+id/card_likeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_done_all_24"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="559dp" />
+
+            <ImageButton
+                android:id="@+id/card_commentButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_comment_bank_24"
+                tools:layout_editor_absoluteX="87dp"
+                tools:layout_editor_absoluteY="561dp" />
+
+            <ImageButton
+                android:id="@+id/card_shareButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/baseline_share_24"
+                tools:layout_editor_absoluteX="160dp"
+                tools:layout_editor_absoluteY="561dp" />-->
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>
