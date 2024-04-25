@@ -28,11 +28,13 @@ import com.computer.socialcampus.R;
 import com.computer.socialcampus.ui.login.LoginViewModel;
 import com.computer.socialcampus.ui.login.LoginViewModelFactory;
 import com.computer.socialcampus.databinding.ActivityLoginBinding;
+import com.computer.socialcampus.ui.register.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
     private ActivityLoginBinding binding;
+    public Button registerButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,8 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        registerButton = findViewById(R.id.register);
+
         loginViewModel = new ViewModelProvider(this, new LoginViewModelFactory())
                 .get(LoginViewModel.class);
 
@@ -48,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = binding.password;
         final Button loginButton = binding.login;
         final ProgressBar loadingProgressBar = binding.loading;
+
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -112,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                     loginViewModel.login(usernameEditText.getText().toString(),
                             passwordEditText.getText().toString());
                 }
-                return false;
+                return true;
             }
         });
 
@@ -124,6 +129,15 @@ public class LoginActivity extends AppCompatActivity {
                         passwordEditText.getText().toString());
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
                 startActivity(intent);
                 finish();
             }

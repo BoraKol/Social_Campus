@@ -8,6 +8,7 @@ import com.computer.socialcampus.R;
 
 public class PostShareActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

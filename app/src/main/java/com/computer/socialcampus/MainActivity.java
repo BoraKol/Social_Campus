@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             Intent i = new Intent(this, AboutActivity.class);
             startActivity(i);
         }
-        if (item.getItemId()==R.id.action_about){
+        if (item.getItemId()==R.id.action_postShare){
             Intent i = new Intent(this, PostShareActivity.class);
             startActivity(i);
         }
