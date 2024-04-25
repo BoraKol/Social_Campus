@@ -25,6 +25,18 @@
         android:theme="@style/Theme.SocialCampus"
         tools:targetApi="31">
         <activity
+            android:name=".ui.postShare.PostShareActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.group.GroupActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.profile.AboutActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.chat.ChatActivity"
             android:exported="false" />
         <activity

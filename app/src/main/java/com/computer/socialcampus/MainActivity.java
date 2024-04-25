@@ -1,13 +1,18 @@
 package com.computer.socialcampus;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
 import com.computer.socialcampus.ui.chat.ChatActivity;
-import com.computer.socialcampus.ui.chat.ChatFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.computer.socialcampus.ui.group.GroupActivity;
+import com.computer.socialcampus.ui.postShare.PostShareActivity;
+import com.computer.socialcampus.ui.profile.AboutActivity;
+import com.computer.socialcampus.ui.profile.ProfileActivity;
+import com.computer.socialcampus.ui.settings.SettingsActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -49,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                R.id.nav_home, R.id.nav_campus, R.id.nav_grups)
                 .setOpenableLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -62,6 +67,32 @@ public class MainActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+
+    @SuppressLint("NonConstantResourceId")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId()==R.id.action_settings){
+            Intent i = new Intent(this, SettingsActivity.class);
+            startActivity(i);
+        }
+        if (item.getItemId()==R.id.action_profile){
+            Intent i = new Intent(this, ProfileActivity.class);
+            startActivity(i);
+        }
+        if (item.getItemId()==R.id.action_newGroup){
+            Intent i = new Intent(this, GroupActivity.class);
+            startActivity(i);
+        }
+        if (item.getItemId()==R.id.action_about){
+            Intent i = new Intent(this, AboutActivity.class);
+            startActivity(i);
+        }
+        if (item.getItemId()==R.id.action_about){
+            Intent i = new Intent(this, PostShareActivity.class);
+            startActivity(i);
+        }
+        return  super.onOptionsItemSelected(item);
     }
 
     @Override
