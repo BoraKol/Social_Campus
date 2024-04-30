@@ -2,14 +2,11 @@ package com.computer.socialcampus.message;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class ChatAdapter extends RecyclerView.Adapter{
-
-
+public class ChatAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -26,12 +23,17 @@ public class ChatAdapter extends RecyclerView.Adapter{
         return 0;
     }
 
-    public class SenderViewHolder extends RecyclerView.ViewHolder{
+    public class RecieverViewHolder extends RecyclerView.ViewHolder{
 
+        public RecieverViewHolder(@NonNull View itemView) {
+            super(itemView);
+        }
+    }
+
+    public class SenderViewHolder extends RecyclerView.ViewHolder{
 
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
-
         }
     }
 }
