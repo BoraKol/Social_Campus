@@ -1,6 +1,7 @@
 package com.computer.socialcampus.data;
 
 import com.computer.socialcampus.data.model.LoggedInUser;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * Class that requests authentication and user information from the remote data source and
@@ -33,6 +34,7 @@ public class LoginRepository {
     }
 
     public void logout() {
+        FirebaseAuth.getInstance().signOut();
         user = null;
         dataSource.logout();
     }
