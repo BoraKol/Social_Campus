@@ -12,6 +12,7 @@ public class LoggedInUser {
     private String email;
     private String password;
     private String collage;
+    private String pic;
 
     public LoggedInUser(String userId, String displayName) {
         this.userId = userId;
