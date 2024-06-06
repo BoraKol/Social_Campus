@@ -93,4 +93,12 @@ public class LoggedInUser {
     public void setCollage(String collage) {
         this.collage = collage;
     }
+
+    public String getPic() {
+        return pic;
+    }
+
+    public void setPic(String pic) {
+        this.pic = pic;
+    }
 }
