@@ -6,9 +6,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.ychat.Fragment.CallsFragment;
-import com.example.ychat.Fragment.ChatsFragment;
-import com.example.ychat.Fragment.StatusFragment;
+import com.computer.socialcampus.ui.chat.CallsFragment;
+import com.computer.socialcampus.ui.chat.ChatFragment;
+import com.computer.socialcampus.ui.chat.StatusFragment;
 
 public class FragmentsAdapter extends FragmentPagerAdapter {
 
@@ -20,10 +20,10 @@ public class FragmentsAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            case 0:return new ChatsFragment();
+            case 0:return new ChatFragment();
             case 1:return new StatusFragment();
             case 2:return new CallsFragment();
-            default:return new ChatsFragment();
+            default:return new ChatFragment();
         }
     }
 

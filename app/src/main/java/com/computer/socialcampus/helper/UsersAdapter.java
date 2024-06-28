@@ -72,11 +72,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
         holder.itemView.setOnClickListener(new View.OnClickListener( ) {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent( context, ChatDetailActivity.class);
-                intent.putExtra("userId",users.getUserId());
-                intent.putExtra("profilePic",users.getPic());
-                intent.putExtra("userName",users.getDisplayName());
-                context.startActivity(intent);
+                //Intent intent = new Intent( context, ChatDetailActivity.class);
+                //intent.putExtra("userId",users.getUserId());
+                //intent.putExtra("profilePic",users.getPic());
+                //intent.putExtra("userName",users.getDisplayName());
+                //context.startActivity(intent);
             }
         });
     }

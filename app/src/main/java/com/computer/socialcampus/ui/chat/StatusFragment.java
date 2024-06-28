@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.ychat.R;
+import com.computer.socialcampus.R;
 
 /**
  * A simple {@link Fragment} subclass.

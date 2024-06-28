@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.ychat.R;
+import com.computer.socialcampus.R;
 
 public class BlankFragment extends Fragment {
 
