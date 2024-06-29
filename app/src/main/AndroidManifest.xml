@@ -7,6 +7,9 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ADD_VOICEMAIL" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -33,6 +36,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialCampus"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyABq-Bnfj0_RdwZaozEPzM9xffkti14GMg"/>
+
         <activity
             android:name=".ui.chat.GroupChatActivity"
             android:exported="false" />
