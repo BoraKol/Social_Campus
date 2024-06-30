@@ -4,8 +4,10 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,15 +32,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.PendingResult;
+import com.google.maps.android.PolyUtil;
 import com.google.maps.model.DirectionsResult;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import com.google.maps.model.TravelMode;
 
@@ -142,11 +147,27 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback, Goo
     }
 
     private void showDirections(com.google.maps.model.DirectionsRoute[] routes) {
-        // Rotaları gösterme kodunu buraya ekleyin
-        // Örneğin, rota polylines ekleyebilirsiniz
-        for (com.google.maps.model.DirectionsRoute route : routes) {
-            // Haritada rota polylines gösterme kodu
-            // mMap.addPolyline(new PolylineOptions().addAll(PolyUtil.decode(route.overviewPolyline.getEncodedPath())));
+        for (int i = 0; i < routes.length; i++) {
+            com.google.maps.model.DirectionsRoute route = routes[i];
+
+            if (route != null && route.overviewPolyline != null) {
+                List<LatLng> polyline = PolyUtil.decode(route.overviewPolyline.points); // Use PolyUtil to decode the points
+
+                // Add the polyline to the map
+                mMap.addPolyline(new PolylineOptions()
+                        .color(Color.BLUE)
+                        .width(10)
+                        .geodesic(true)
+                        .addAll(polyline));
+
+                // Move the camera to the starting point of the route
+                if (route.legs != null && route.legs.length > 0 && route.legs[0].startLocation != null) {
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
+                            new LatLng(route.legs[0].startLocation.lat, route.legs[0].startLocation.lng), 15));
+                }
+            } else {
+                Log.e("showDirections", "Route or overviewPolyline is null at index: " + i);
+            }
         }
     }
 

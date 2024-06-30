@@ -3,7 +3,7 @@ package com.computer.socialcampus.ui.login;
 /**
  * Class exposing authenticated user details to the UI.
  */
-class LoggedInUserView {
+public class LoggedInUserView {
     private String displayName;
     private String userId;
     private String firstName;
@@ -15,7 +15,7 @@ class LoggedInUserView {
     //... other data fields that may be accessible to the UI
 
 
-    public LoggedInUserView() {
+    public LoggedInUserView(String s, String johnDoe) {
     }
 
     LoggedInUserView(String displayName) {
