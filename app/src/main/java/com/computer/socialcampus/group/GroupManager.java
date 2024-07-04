@@ -47,7 +47,7 @@ public class GroupManager {
     }
 
     // Gönderi oluşturma metodu
-    public void createPost(String groupId, String userId, String postContent) {
+    public void createPost(String groupId, Post post) {
         if (post.getImageUri() != null) {
             uploadMedia(post.getImageUri(), "images", new OnMediaUploadListener() {
                 @Override
@@ -152,7 +152,7 @@ public class GroupManager {
                 });
     }
 
-    public void addComment(String postId, String commentText) {
+    public void addComment(String postId, String commentText, String username) {
         Comment comment = new Comment(commentText, "Kullanıcı 1"); // Kullanıcı adı örnek olarak verilmiştir
         db.collection("posts").document(postId).collection("comments").add(comment)
                 .addOnSuccessListener(documentReference -> {

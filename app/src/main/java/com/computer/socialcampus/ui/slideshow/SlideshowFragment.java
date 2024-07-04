@@ -1,5 +1,6 @@
 package com.computer.socialcampus.ui.slideshow;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.computer.socialcampus.R;
 import com.computer.socialcampus.databinding.FragmentSlideshowBinding;
 import com.computer.socialcampus.group.Group;
 import com.computer.socialcampus.group.GroupManager;
+import com.computer.socialcampus.ui.home.HomeFragment;
 import com.computer.socialcampus.ui.postShare.Post;
 
 import java.util.ArrayList;
@@ -112,6 +114,23 @@ public class SlideshowFragment extends Fragment {
 
         groupNameInput.setText("");
         groupDescriptionInput.setText("");
+    }
+
+    private void addGroupToView(Group group) {
+        TextView groupTextView = new TextView(getContext());
+        groupTextView.setText(group.getGroupName() + "\n" + group.getGroupDescription());
+        groupTextView.setPadding(16, 16, 16, 16);
+        groupTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Gruba tıklanınca yapılacak işlemler
+                Intent intent = new Intent(getContext(), HomeFragment.class);
+                intent.putExtra("groupId", group.getGroupId());
+                startActivity(intent);
+            }
+        });
+
+        groupListLayout.addView(groupTextView);
     }
 
     @Override

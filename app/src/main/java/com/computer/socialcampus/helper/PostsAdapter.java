@@ -6,7 +6,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.computer.socialcampus.ui.postShare.Post;
+
+import java.util.List;
+
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.CardViewHolder>{
+    public PostsAdapter(List<Post> postsList) {
+    }
+
     @NonNull
     @Override
     public CardViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

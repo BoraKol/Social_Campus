@@ -11,6 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.computer.socialcampus.R;
+import com.computer.socialcampus.service.CommentNotificationListener;
+import com.computer.socialcampus.service.FollowNotificationListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -29,6 +31,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     private String userId;
     private String currentUserId;
+    private FollowNotificationListener followNotificationListener;
+    private String postId;
+    private CommentNotificationListener commentNotificationListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         userId = getIntent().getStringExtra("userId");
         currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        postId = getIntent().getStringExtra("postId");
+
+        followNotificationListener = new FollowNotificationListener(this);
+        followNotificationListener.startListening(currentUserId);
+
+        commentNotificationListener = new CommentNotificationListener(this, postId);
+        commentNotificationListener.startListening();
 
         loadProfile();
 

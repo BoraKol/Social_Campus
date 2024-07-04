@@ -14,6 +14,7 @@ import com.computer.socialcampus.ui.postShare.PostShareActivity;
 import com.computer.socialcampus.ui.profile.AboutActivity;
 import com.computer.socialcampus.ui.profile.ProfileActivity;
 import com.computer.socialcampus.ui.settings.SettingsActivity;
+import com.computer.socialcampus.ui.slideshow.SlideshowFragment;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -124,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         if (item.getItemId()==R.id.action_newGroup){
-            Intent i = new Intent(this, GroupActivity.class);
+            Intent i = new Intent(this, SlideshowFragment.class);
             startActivity(i);
         }
         if (item.getItemId()==R.id.action_about){

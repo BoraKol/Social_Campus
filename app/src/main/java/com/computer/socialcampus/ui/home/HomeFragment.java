@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment {
 
     private void addPostToView(Post post) {
         TextView postTextView = new TextView(getContext());
-        postTextView.setText(post.getPostContent());
+        postTextView.setText(post.getContent());
         postTextView.setPadding(16, 16, 16, 16);
 
         postListLayout.addView(postTextView);

@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.auth.User;
 import com.google.firebase.storage.FirebaseStorage;
@@ -53,6 +54,7 @@ public class PostShareActivity extends AppCompatActivity {
     private Uri selectedVideoUri;
     private String groupId;
     private boolean isTimeline;
+    private FirebaseFirestore db;
 
     private GroupManager groupManager;
 
@@ -60,6 +62,7 @@ public class PostShareActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_share);
+        db = FirebaseFirestore.getInstance();
 
         postContentEditText = findViewById(R.id.post_content);
         selectImageButton = findViewById(R.id.select_image_button);
@@ -148,7 +151,7 @@ public class PostShareActivity extends AppCompatActivity {
         }
 
         Post post = new Post();
-        post.setPostContent(postContent);
+        post.setContent(postContent);
         post.setImageUri(selectedImageUri != null ? selectedImageUri.toString() : null);
         post.setVideoUri(selectedVideoUri != null ? selectedVideoUri.toString() : null);
 
@@ -184,7 +187,7 @@ public class PostShareActivity extends AppCompatActivity {
     }
 
     private void loadComments() {
-        String postId = getIntent().getStringExtra("postId");
+        String postId = getIntent().getStringExtra("postId");;
         db.collection("posts").document(postId).collection("comments")
                 .get()
                 .addOnCompleteListener(task -> {
@@ -201,6 +204,7 @@ public class PostShareActivity extends AppCompatActivity {
                         }
                     } else {
                         // Yorumları yükleme hatası
+                        Toast.makeText(this, "Yorumlar yüklenirken hata oluştu", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
