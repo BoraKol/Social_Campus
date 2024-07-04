@@ -1,10 +1,13 @@
 package com.computer.socialcampus.service;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -57,13 +60,23 @@ public class CommentNotificationListener {
                     // Create a notification
                     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context);
                     notificationBuilder.setSmallIcon(R.drawable.ic_notification);
-                    notificationBuilder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher));
+                    notificationBuilder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_notification));
                     notificationBuilder.setContentTitle("New Comment!");
                     notificationBuilder.setContentText(username + " commented: " + commentText);
                     notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);
 
                     // Show the notification
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                        // TODO: Consider calling
+                        //    ActivityCompat#requestPermissions
+                        // here to request the missing permissions, and then overriding
+                        //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                        //                                          int[] grantResults)
+                        // to handle the case where the user grants the permission. See the documentation
+                        // for ActivityCompat#requestPermissions for more details.
+                        return;
+                    }
                     notificationManager.notify(12345, notificationBuilder.build());
                 })
                 .addOnFailureListener(e -> {

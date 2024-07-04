@@ -116,7 +116,7 @@ public class SlideshowFragment extends Fragment {
         groupDescriptionInput.setText("");
     }
 
-    private void addGroupToView(Group group) {
+    private void addGroupToViewWithIntent(Group group) {
         TextView groupTextView = new TextView(getContext());
         groupTextView.setText(group.getGroupName() + "\n" + group.getGroupDescription());
         groupTextView.setPadding(16, 16, 16, 16);

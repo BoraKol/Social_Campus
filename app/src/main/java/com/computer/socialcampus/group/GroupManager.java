@@ -14,7 +14,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Comment;
+import com.computer.socialcampus.ui.postShare.Comment;
 
 import java.util.List;
 public class GroupManager {
@@ -48,7 +48,7 @@ public class GroupManager {
 
     // Gönderi oluşturma metodu
     public void createPost(String groupId, Post post) {
-        if (post.getImageUri() != null) {
+        if (post.getImageUri() != null && post.getVideoUri() == null) {
             uploadMedia(post.getImageUri(), "images", new OnMediaUploadListener() {
                 @Override
                 public void onUploadSuccess(String downloadUrl) {
@@ -61,7 +61,7 @@ public class GroupManager {
                     // Hata durumunda işlem
                 }
             });
-        } else if (post.getVideoUri() != null) {
+        } else if (post.getImageUri() == null && post.getVideoUri() != null) {
             uploadMedia(post.getVideoUri(), "videos", new OnMediaUploadListener() {
                 @Override
                 public void onUploadSuccess(String downloadUrl) {
@@ -90,7 +90,13 @@ public class GroupManager {
         Uri fileUri = Uri.parse(mediaUri);
         StorageReference storageRef = storage.getReference().child(mediaType).child(fileUri.getLastPathSegment());
         storageRef.putFile(fileUri)
-                .addOnSuccessListener(taskSnapshot -> storageRef.getDownloadUrl().addOnSuccessListener(listener::onUploadSuccess))
+                .addOnSuccessListener(taskSnapshot -> {
+                    if (mediaType.equals("images")) {
+                        storageRef.getDownloadUrl().addOnSuccessListener(uri -> listener.onUploadSuccess(uri.toString()));
+                    } else if (mediaType.equals("videos")) {
+                        storageRef.getDownloadUrl().addOnSuccessListener(uri -> listener.onUploadSuccess(uri.toString()));
+                    }
+                })
                 .addOnFailureListener(listener::onUploadFailed);
     }
 

@@ -1,5 +1,19 @@
 package com.computer.socialcampus.helper;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.computer.socialcampus.R;
+import com.computer.socialcampus.group.Group;
+
+import java.util.List;
+
 public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHolder> {
     private List<Group> groupList;
     private OnItemClickListener listener;
@@ -48,8 +62,8 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.GroupViewHol
     @Override
     public void onBindViewHolder(GroupViewHolder holder, int position) {
         Group currentGroup = groupList.get(position);
-        holder.nameTextView.setText(currentGroup.getName());
-        holder.descriptionTextView.setText(currentGroup.getDescription());
+        holder.nameTextView.setText(currentGroup.getGroupName());
+        holder.descriptionTextView.setText(currentGroup.getGroupDescription());
         holder.itemView.setTag(currentGroup);
     }
 

@@ -53,7 +53,7 @@ public class FollowNotificationListener {
                     // Create a notification
                     NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context);
                     notificationBuilder.setSmallIcon(R.drawable.ic_notification);
-                    notificationBuilder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_launcher));
+                    notificationBuilder.setLargeIcon(BitmapFactory.decodeResource(context.getResources(), R.drawable.ic_notification));
                     notificationBuilder.setContentTitle("New Follower!");
                     notificationBuilder.setContentText(newFollowerUsername + " started following you!");
                     notificationBuilder.setPriority(NotificationCompat.PRIORITY_HIGH);

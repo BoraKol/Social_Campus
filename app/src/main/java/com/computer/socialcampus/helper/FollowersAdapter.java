@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.computer.socialcampus.R;
+import com.computer.socialcampus.data.model.LoggedInUser;
 import com.google.firebase.firestore.auth.User;
 
 import java.util.List;
 
 public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.ViewHolder> {
 
-    private List<User> followersList;
+    private List<LoggedInUser> followersList;
 
-    public FollowersAdapter(List<User> followersList) {
+    public FollowersAdapter(List<LoggedInUser> followersList) {
         this.followersList = followersList;
     }
 
@@ -31,8 +32,8 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        User user = followersList.get(position);
-        holder.usernameTextView.setText(user.getUsername());
+        LoggedInUser user = followersList.get(position);
+        holder.usernameTextView.setText(user.getDisplayName());
         // Profil resmini ve diğer bilgileri yükleyin
     }
 
