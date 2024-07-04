@@ -23,9 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder>{
-
     ArrayList<LoggedInUser> list;
     Context context;
 

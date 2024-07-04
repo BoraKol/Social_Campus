@@ -1,71 +1,143 @@
 package com.computer.socialcampus.ui.postShare;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.firestore.auth.User;
 
-public class Post {
-    private String postId;
-    private String imageUrl;
-    private String description;
-    private String postContent;
-    private User user;
-    private long timestamp;
+import java.util.Map;
 
-    public Post() {}
+public class Post implements Parcelable {
 
-    public Post(String postId, String imageUrl, String description, String postContent, User user) {
-        this.postId = postId;
-        this.imageUrl = imageUrl;
-        this.description = description;
-        this.postContent = postContent;
-        this.user = user;
-        this.timestamp = System.currentTimeMillis();
+    private String username;
+    private String content;
+    private String mediaUrl; // URL for the image or video
+    private String groupId; // ID of the group the post belongs to
+    private String timestamp; // Timestamp of the post creation
+    private String imageUri;
+    private String videoUri;
+    private int likes;
+    private Map<String, Object> comments;
+
+    public Post() {
     }
 
-    public String getPostId() {
-        return postId;
+    public Post(String username, String content, String mediaUrl) {
+        this.username = username;
+        this.content = content;
+        this.mediaUrl = mediaUrl;
     }
 
-    public void setPostId(String postId) {
-        this.postId = postId;
+    protected Post(Parcel in) {
+        username = in.readString();
+        content = in.readString();
+        mediaUrl = in.readString();
     }
 
-    public String getImageUrl() {
-        return imageUrl;
+    public Post(String username, String content, String mediaUrl, String groupId, String timestamp) {
+        this.username = username;
+        this.content = content;
+        this.mediaUrl = mediaUrl;
+        this.groupId = groupId;
+        this.timestamp = timestamp;
     }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
+    public static final Creator<Post> CREATOR = new Creator<Post>() {
+        @Override
+        public Post createFromParcel(Parcel in) {
+            return new Post(in);
+        }
+
+        @Override
+        public Post[] newArray(int size) {
+            return new Post[size];
+        }
+    };
+
+    // Getters and setters for username, content, and mediaUrl
+    public String getUsername() {
+        return username;
     }
 
-    public String getDescription() {
-        return description;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public String getContent() {
+        return content;
     }
 
-    public String getPostContent() {
-        return postContent;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public void setPostContent(String postContent) {
-        this.postContent = postContent;
+    public String getMediaUrl() {
+        return mediaUrl;
     }
 
-    public User getUser() {
-        return user;
+    public void setMediaUrl(String mediaUrl) {
+        this.mediaUrl = mediaUrl;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public long getTimestamp() {
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(content);
+        dest.writeString(mediaUrl);
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
+
+    public String getVideoUri() {
+        return videoUri;
+    }
+
+    public void setVideoUri(String videoUri) {
+        this.videoUri = videoUri;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public Map<String, Object> getComments() {
+        return comments;
+    }
+
+    public void setComments(Map<String, Object> comments) {
+        this.comments = comments;
     }
 }

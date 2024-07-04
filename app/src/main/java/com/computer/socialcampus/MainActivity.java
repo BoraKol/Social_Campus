@@ -7,8 +7,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
 
+import com.computer.socialcampus.helper.PostsAdapter;
 import com.computer.socialcampus.ui.chat.ChatActivity;
-import com.computer.socialcampus.ui.group.GroupActivity;
+import com.computer.socialcampus.ui.postShare.Post;
 import com.computer.socialcampus.ui.postShare.PostShareActivity;
 import com.computer.socialcampus.ui.profile.AboutActivity;
 import com.computer.socialcampus.ui.profile.ProfileActivity;
@@ -16,21 +17,37 @@ import com.computer.socialcampus.ui.settings.SettingsActivity;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.computer.socialcampus.databinding.ActivityMainBinding;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
 
+    private RecyclerView postsRecyclerView;
+    private FirebaseDatabase firebaseDatabase;
+    private List<Post> postsList;
 
+
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +56,32 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+
+        DatabaseReference postsRef = firebaseDatabase.getReference("posts");
+
+        // Implement a ValueEventListener to listen for changes in the posts node
+        postsRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                postsList.clear();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Post post = postSnapshot.getValue(Post.class);
+                    postsList.add(post);
+                }
+                // Update the adapter with the new list of posts
+                postsRecyclerView.getAdapter().notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Handle errors
+            }
+        });
+
+        postsRecyclerView = findViewById(R.id.fragmentContainer);
+        postsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        postsRecyclerView.setAdapter(new PostsAdapter(postsList));
+        postsList = new ArrayList<>();
         binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

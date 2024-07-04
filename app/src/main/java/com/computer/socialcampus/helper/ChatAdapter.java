@@ -19,9 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
 public class ChatAdapter extends RecyclerView.Adapter{
-
     ArrayList<MessageModels> messageModels;
     Context context;
     String recId;

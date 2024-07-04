@@ -1,5 +1,6 @@
 package com.computer.socialcampus.helper;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -9,9 +10,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import com.computer.socialcampus.ui.chat.CallsFragment;
 import com.computer.socialcampus.ui.chat.ChatFragment;
 import com.computer.socialcampus.ui.chat.StatusFragment;
-
-public class FragmentsAdapter extends FragmentPagerAdapter {
-
+public class FragmentsAdapter extends FragmentPagerAdapter{
     public FragmentsAdapter(@NonNull FragmentManager fm) {
         super(fm);
     }
