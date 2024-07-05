@@ -1,13 +1,13 @@
 package com.computer.socialcampus;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
-import android.widget.SearchView;
 
 import com.computer.socialcampus.data.model.LoggedInUser;
 import com.computer.socialcampus.helper.PostsAdapter;
@@ -31,6 +31,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.SearchView;
 
 import com.computer.socialcampus.databinding.ActivityMainBinding;
 import com.google.firebase.database.DataSnapshot;
@@ -52,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
     private List<Post> postsList;
     private List<LoggedInUser> userList;
     private UsersAdapter userAdapter;
-
 
     @SuppressLint("WrongViewCast")
     @Override
