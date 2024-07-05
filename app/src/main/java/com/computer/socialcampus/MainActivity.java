@@ -3,11 +3,15 @@ package com.computer.socialcampus;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.SearchView;
 
+import com.computer.socialcampus.data.model.LoggedInUser;
 import com.computer.socialcampus.helper.PostsAdapter;
+import com.computer.socialcampus.helper.UsersAdapter;
 import com.computer.socialcampus.ui.chat.ChatActivity;
 import com.computer.socialcampus.ui.postShare.Post;
 import com.computer.socialcampus.ui.postShare.PostShareActivity;
@@ -46,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView postsRecyclerView;
     private FirebaseDatabase firebaseDatabase;
     private List<Post> postsList;
+    private List<LoggedInUser> userList;
+    private UsersAdapter userAdapter;
 
 
     @SuppressLint("WrongViewCast")
@@ -57,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        postsList = new ArrayList<>();
 
         DatabaseReference postsRef = firebaseDatabase.getReference("posts");
 
@@ -69,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                     Post post = postSnapshot.getValue(Post.class);
                     postsList.add(post);
                 }
-                // Update the adapter with the new list of posts
+
                 postsRecyclerView.getAdapter().notifyDataSetChanged();
             }
 
@@ -108,9 +116,54 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchUsers(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                searchUsers(newText);
+                return true;
+            }
+        });
+
         return true;
+    }
+
+    private void searchUsers(String query) {
+        if (TextUtils.isEmpty(query)) {
+            userList.clear();
+            userAdapter.notifyDataSetChanged();
+            return;
+        }
+
+        DatabaseReference usersRef = firebaseDatabase.getReference("users");
+        usersRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                userList.clear();
+                for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                    LoggedInUser user = snapshot.getValue(LoggedInUser.class);
+                    if (user != null && user.getDisplayName().toLowerCase().contains(query.toLowerCase())) {
+                        userList.add(user);
+                    }
+                }
+                userAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // Handle possible errors
+            }
+        });
     }
 
     @SuppressLint("NonConstantResourceId")

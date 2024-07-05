@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.computer.socialcampus.R;
+import com.computer.socialcampus.data.model.LoggedInUser;
 import com.computer.socialcampus.helper.FollowersAdapter;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -19,7 +20,7 @@ public class FollowersActivity extends AppCompatActivity {
 
     private RecyclerView followersRecyclerView;
     private FollowersAdapter followersAdapter;
-    private List<User> followersList;
+    private List<LoggedInUser> followersList;
     private String userId;
 
     @Override
@@ -49,7 +50,7 @@ public class FollowersActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         followersList.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            User user = document.toObject(User.class);
+                            LoggedInUser user = document.toObject(LoggedInUser.class);
                             followersList.add(user);
                         }
                         followersAdapter.notifyDataSetChanged();

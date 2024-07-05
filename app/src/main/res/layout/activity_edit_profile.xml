@@ -11,7 +11,7 @@
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
-        android:src="@drawable/ic_profile"
+        android:src="@drawable/avatar3"
         android:clickable="true"
         android:focusable="true" />
 

@@ -92,7 +92,9 @@ public class SlideshowFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 // Gruba tıklanınca yapılacak işlemler
-                Toast.makeText(getContext(), group.getGroupName() + " seçildi", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getContext(), HomeFragment.class);
+                intent.putExtra("groupId", group.getGroupId());
+                startActivity(intent);
             }
         });
 
@@ -114,23 +116,6 @@ public class SlideshowFragment extends Fragment {
 
         groupNameInput.setText("");
         groupDescriptionInput.setText("");
-    }
-
-    private void addGroupToViewWithIntent(Group group) {
-        TextView groupTextView = new TextView(getContext());
-        groupTextView.setText(group.getGroupName() + "\n" + group.getGroupDescription());
-        groupTextView.setPadding(16, 16, 16, 16);
-        groupTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Gruba tıklanınca yapılacak işlemler
-                Intent intent = new Intent(getContext(), HomeFragment.class);
-                intent.putExtra("groupId", group.getGroupId());
-                startActivity(intent);
-            }
-        });
-
-        groupListLayout.addView(groupTextView);
     }
 
     @Override

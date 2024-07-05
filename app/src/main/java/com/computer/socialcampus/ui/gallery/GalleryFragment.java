@@ -45,6 +45,8 @@ import com.google.maps.model.DirectionsResult;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.TravelMode;
 
 
@@ -146,21 +148,19 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback, Goo
                 });
     }
 
-    private void showDirections(com.google.maps.model.DirectionsRoute[] routes) {
+    private void showDirections(DirectionsRoute[] routes) {
         for (int i = 0; i < routes.length; i++) {
-            com.google.maps.model.DirectionsRoute route = routes[i];
+            DirectionsRoute route = routes[i];
 
             if (route != null && route.overviewPolyline != null) {
-                List<LatLng> polyline = PolyUtil.decode(route.overviewPolyline.points); // Use PolyUtil to decode the points
+                List<LatLng> polyline = PolyUtil.decode(route.overviewPolyline.getEncodedPath());
 
-                // Add the polyline to the map
                 mMap.addPolyline(new PolylineOptions()
                         .color(Color.BLUE)
                         .width(10)
                         .geodesic(true)
                         .addAll(polyline));
 
-                // Move the camera to the starting point of the route
                 if (route.legs != null && route.legs.length > 0 && route.legs[0].startLocation != null) {
                     mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(
                             new LatLng(route.legs[0].startLocation.lat, route.legs[0].startLocation.lng), 15));
@@ -170,6 +170,7 @@ public class GalleryFragment extends Fragment implements OnMapReadyCallback, Goo
             }
         }
     }
+
 
 
 
